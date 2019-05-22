@@ -1,7 +1,7 @@
 #define LED_R D5
 #define LED_M D6
 #define LED_L D7
-#define SWITCH D8
+#define SWITCH D1
 
 void setup() {
   pinMode(LED_R, OUTPUT);

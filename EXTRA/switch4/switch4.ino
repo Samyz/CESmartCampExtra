@@ -2,7 +2,7 @@
 #define LED_L D6
 #define SWITCH_A D1
 #define SWITCH_B D2
-boolean ledL = false;
+long setMillisL, setMillisR;
 
 void setup() {
   pinMode(LED_R, OUTPUT);
@@ -13,18 +13,17 @@ void setup() {
 
 void loop() {
   if (!digitalRead(SWITCH_A)) {
-    delay(100);
-    if (!ledL) {
-      ledL = !ledL;
-      digitalWrite(LED_L, HIGH);
-    }
-    else
-      digitalWrite(LED_R, HIGH);
+    setMillisL = millis();
   }
   if (!digitalRead(SWITCH_B)) {
-    delay(100);
-    digitalWrite(LED_L, LOW);
-    digitalWrite(LED_R, LOW);
-    ledL = false;
+    setMillisR = millis();
   }
+  if (millis() - setMillisL < 3000)
+    digitalWrite(LED_L, HIGH);
+  else
+    digitalWrite(LED_L, LOW);
+  if (millis() - setMillisR < 2000)
+    digitalWrite(LED_R, HIGH);
+  else
+    digitalWrite(LED_R, LOW);
 }
